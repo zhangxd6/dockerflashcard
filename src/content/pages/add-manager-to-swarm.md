@@ -2,7 +2,7 @@
 path: /
 order: 1
 title: Add manager Swarm Cluster
-description: 
+description: docker swarm join-token manager
 domain: 1
 topic: Complete​ ​the​ ​setup​ ​of​ ​a​ ​swarm​ ​mode​ ​cluster,​ ​with​ ​managers​ ​and​ ​worker​ ​nodes
 ---

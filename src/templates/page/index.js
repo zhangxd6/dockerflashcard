@@ -3,10 +3,35 @@ import Footer from './footer';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {Layout} from 'gatsby-theme-apollo';
+import styled from '@emotion/styled';
+import {
+  FlexWrapper,
+  Layout,
+  LogoTitle,
+  MenuButton,
+  MobileHeader,
+  ResponsiveSidebar,
+  Sidebar,
+  SidebarNav,
+  breakpoints,
+  headerHeight
+} from 'gatsby-theme-apollo';
 import {graphql} from 'gatsby';
 
+const OuterContentWrapper = styled.div({
+  flexGrow: 1,
+  overflow: 'auto',
+  outline: 'none',
+  WebkitOverflowScrolling: 'touch',
+  [breakpoints.md]: {
+    paddingTop: headerHeight
+  }
+});
 
+const StyledMobileHeader = styled(MobileHeader)({
+  width: '100%',
+  position: 'fixed'
+});
 
 const anchorPattern = /<a href="([\w/#-]+)">([\w\s.,-]+)<\/a>/gm;
 
@@ -29,43 +54,43 @@ export default class Page extends Component {
     // generate a representation of the chapters and sections within them to
     // render the sidebar and table of contents on the overview page
     const contents = this.props.data.allMarkdownRemark.edges
-      .filter(({node}) => node.frontmatter.order > 0 && node.tableOfContents)
+      .filter(({node}) => node.frontmatter.order > 0)
       .map(({node}) => {
         let match;
         const pages = [];
-        while ((match = anchorPattern.exec(node.tableOfContents)) !== null) {
-          const path = match[1];
-          const hash = path.slice(path.lastIndexOf('/') + 1);
-          const hashPath = node.frontmatter.path + hash;
-          const title = match[2];
-          const description = node.excerpt.slice(
-            node.excerpt.indexOf(title) + title.length
-          );
+        // while ((match = anchorPattern.exec(node.tableOfContents)) !== null) {
+        //   const path = match[1];
+        //   const hash = path.slice(path.lastIndexOf('/') + 1);
+        //   const hashPath = node.frontmatter.path + hash;
+        //   const title = match[2];
+        //   const description = node.excerpt.slice(
+        //     node.excerpt.indexOf(title) + title.length
+        //   );
 
-          pages.push({
-            path: hashPath,
-            title,
-            description: description
-              .slice(0, description.indexOf('.') + 1)
-              .replace('>', '')
-              .trim()
-              .replace(/\*/g, ''),
-            anchor:
-              node.frontmatter.path ===
-              this.props.location.pathname.replace(/\/$/, '')
-          });
-        }
+        //   pages.push({
+        //     path: hashPath,
+        //     title,
+        //     description: description
+        //       .slice(0, description.indexOf('.') + 1)
+        //       .replace('>', '')
+        //       .trim()
+        //       .replace(/\*/g, ''),
+        //     anchor:
+        //       node.frontmatter.path ===
+        //       this.props.location.pathname.replace(/\/$/, '')
+        //   });
+        // }
 
         return {
           path: node.frontmatter.path,
           title: node.frontmatter.title,
           description: node.frontmatter.description,
-          domain: node.frontmatter.domain,
-          topic: node.frontmatter.topic,
+          // image: node.frontmatter.image.childImageSharp.fluid.src,
           pages
         };
       });
 
+      
     const {title, description} = this.props.data.site.siteMetadata;
     return (
       <Layout>
@@ -83,13 +108,38 @@ export default class Page extends Component {
             content={'https://principledgraphql.com' + ogImage}
           /> */}
         </Helmet>
-        <Content
+        <ResponsiveSidebar>
+          {({sidebarRef, onWrapperClick, sidebarOpen, openSidebar}) => (
+            <FlexWrapper onClick={onWrapperClick}>
+              <Sidebar
+                noLogo
+                responsive
+                ref={sidebarRef}
+                open={sidebarOpen}
+                title={title}
+              >
+                <SidebarNav
+                  alwaysExpanded
+                  pathname={this.props.location.pathname}
+                  contents={contents}
+                />
+              </Sidebar>
+              <OuterContentWrapper tabIndex="0">
+                <StyledMobileHeader>
+                  <MenuButton onClick={openSidebar} />
+                  <LogoTitle noLogo />
+                </StyledMobileHeader>
+                <Content
                   isHome={!this.props.data.markdownRemark.frontmatter.order}
                   contents={contents}
                   page={this.props.data.markdownRemark}
                   pages={this.props.data.allMarkdownRemark.edges}
                 />
                 <Footer />
+              </OuterContentWrapper>
+            </FlexWrapper>
+          )}
+        </ResponsiveSidebar>
       </Layout>
     );
   }
@@ -104,8 +154,6 @@ export const pageQuery = graphql`
         title
         description
         order
-        domain
-        topic
       }
     }
 
@@ -123,8 +171,6 @@ export const pageQuery = graphql`
             title
             description
             order
-            domain
-            topic
           }
         }
       }

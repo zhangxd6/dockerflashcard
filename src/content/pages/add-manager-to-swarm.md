@@ -1,6 +1,6 @@
 ---
-path: /
-order: 1
+path: /add-manager-to-swarm
+order: 2
 title: Add manager Swarm Cluster
 description: docker swarm join-token manager
 domain: 1
@@ -9,3 +9,11 @@ topic: Complete​ ​the​ ​setup​ ​of​ ​a​ ​swarm​ ​mode​
 
 Bob need to add an additional manager node to the swarm. He will need the manager token. How he can get the *join-token* for manager?
 <!-- end -->
+
+
+
+###  Explanation
+
+```
+   docker swarm join-token manager
+```

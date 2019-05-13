@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import {ContentWrapper, breakpoints, colors} from 'gatsby-theme-apollo';
 import {Link} from 'gatsby';
 import {MdChevronLeft, MdChevronRight} from 'react-icons/md';
-import {size} from 'polished';
+import {size, hideText} from 'polished';
 
 
 const InnerWrapper = styled.div({
@@ -118,7 +118,7 @@ const h3tag = `<h3 id=\"explanation\"><a href=\"#explanation\" aria-label=\"expl
 
 const wrapExplaition=(html)=>{
   let newContent =  html.replace(h3tag,`<div>
-   <button style="
+   <button id="btn-exp" style="
    border: 1px solid;
    background: transparent;
    border-radius: 5px;
@@ -128,7 +128,7 @@ const wrapExplaition=(html)=>{
    vertical-align: middle;
    margin: 2rem 0;
    position: relative;"
-   onclick="getElementById('exp').style.display='inherit'">Hint</button>
+   >Hint</button>
    <div id="exp" style="display: none">
   `);
   newContent = `
@@ -136,77 +136,115 @@ const wrapExplaition=(html)=>{
   </div></div>`;
   return newContent;
 }
+export default class Content extends React.Component{
 
-export default function Content(props) {
-  // determine current page's place in the order
-  const {title, description, path} = props.page.frontmatter;
-  const pageIndex = props.pages.findIndex(
-    ({node}) => node.frontmatter.path === path
-  );
+  constructor(props){
+    super(props);
+    this.state={
+       show : false
+    };
+  }
 
 
-  // define next and previous pages
-  const previousPage = props.pages[pageIndex - 1];
-  const nextPage = props.pages[pageIndex + 1];
 
-  return (
-    <ContentWrapper>
-      <InnerWrapper>
-        {title && (
-          <Fragment>
-            <MainHeading>
-              {/* {image && <HeadingImage src={image.childImageSharp.fluid.src} />} */}
-              <span>
-                {title}
-                <ChapterDescription>{description}</ChapterDescription>
-              </span>
-            </MainHeading>
-            <hr />
-          </Fragment>
-        )}
-        <Markdown>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: wrapExplaition(props.page.html)
-            }}
-          />
-          
-        </Markdown>
-        <PageNav>
-          {previousPage && (
-            <PageNavLink to={previousPage.node.frontmatter.path}>
-              <MdChevronLeft />
-              <PageNavLinkText>
-                <PageNavLinkHeading>Previous</PageNavLinkHeading>
-                <PageNavLinkTitle>
-                  {previousPage.node.frontmatter.title || 'Overview'}
-                </PageNavLinkTitle>
-              </PageNavLinkText>
-            </PageNavLink>
+  static propTypes = {
+    isHome: PropTypes.bool.isRequired,
+    page: PropTypes.object.isRequired,
+    pages: PropTypes.array.isRequired,
+    contents: PropTypes.array.isRequired
+  };
+  
+  handlerClick(){
+    const hint = document.getElementById('exp');
+    if(!hint)return;
+    this.setState({
+      show: !this.state.show
+    })
+
+    if(this.state.show){
+      hint.style.display=""
+    }else{
+      hint.style.display="none"
+    }
+  }
+
+  componentDidMount() {
+    if(typeof window ==='undefined')
+     return;
+    const btn = document.getElementById('btn-exp');
+    
+    if(btn){
+      btn.addEventListener("click", this.handlerClick.bind(this));
+    }
+  }
+
+  render() {
+    // determine current page's place in the order
+    const {title, description, path, domain} = this.props.page.frontmatter;
+    const pageIndex = this.props.pages.findIndex(
+      ({node}) => node.frontmatter.path === path
+    );
+    console.log(domain)
+  
+    // define next and previous pages
+    const previousPage = this.props.pages[pageIndex - 1];
+    const nextPage = this.props.pages[pageIndex + 1];
+  
+    return (
+      <ContentWrapper>
+        <InnerWrapper>
+          {title && (
+            <Fragment>
+              <MainHeading>
+                {/* {image && <HeadingImage src={image.childImageSharp.fluid.src} />} */}
+                <span>
+                  {title}
+                  <ChapterDescription>{description}{domain ===1 && (<span>   &#9989;</span>) }</ChapterDescription> 
+                </span>
+              </MainHeading>
+              <hr />
+            </Fragment>
           )}
-          {nextPage && (
-            <PageNavLink
-              to={nextPage.node.frontmatter.path}
-              style={{marginLeft: 'auto'}}
-            >
-              <PageNavLinkText align="right">
-                <PageNavLinkHeading>Next</PageNavLinkHeading>
-                <PageNavLinkTitle>
-                  {nextPage.node.frontmatter.title}
-                </PageNavLinkTitle>
-              </PageNavLinkText>
-              <MdChevronRight />
-            </PageNavLink>
-          )}
-        </PageNav>
-      </InnerWrapper>
-    </ContentWrapper>
-  );
+          <Markdown>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: wrapExplaition(this.props.page.html)
+              }}
+            />
+            
+          </Markdown>
+          <PageNav>
+            {previousPage && (
+              <PageNavLink to={previousPage.node.frontmatter.path}>
+                <MdChevronLeft />
+                <PageNavLinkText>
+                  <PageNavLinkHeading>Previous</PageNavLinkHeading>
+                  <PageNavLinkTitle>
+                    {previousPage.node.frontmatter.title || 'Overview'}
+                  </PageNavLinkTitle>
+                </PageNavLinkText>
+              </PageNavLink>
+            )}
+            {nextPage && (
+              <PageNavLink
+                to={nextPage.node.frontmatter.path}
+                style={{marginLeft: 'auto'}}
+              >
+                <PageNavLinkText align="right">
+                  <PageNavLinkHeading>Next</PageNavLinkHeading>
+                  <PageNavLinkTitle>
+                    {nextPage.node.frontmatter.title}
+                  </PageNavLinkTitle>
+                </PageNavLinkText>
+                <MdChevronRight />
+              </PageNavLink>
+            )}
+          </PageNav>
+        </InnerWrapper>
+      </ContentWrapper>
+    );
+  }
 }
 
-Content.propTypes = {
-  isHome: PropTypes.bool.isRequired,
-  page: PropTypes.object.isRequired,
-  pages: PropTypes.array.isRequired,
-  contents: PropTypes.array.isRequired
-};
+
+

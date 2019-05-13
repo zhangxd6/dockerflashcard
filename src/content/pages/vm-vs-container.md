@@ -8,13 +8,15 @@ topic: Overview
 ---
 VMs are a full copy of an operating system with its dedicated resources.
 
-Docker containers share the underlying resources of the Docker host.  It is just a process.
+Docker containers share the underlying resources of the Docker host.  It is just a process[1].
 
-[So they are different, Can VMs and Containers coexist?] [1]
+![container vs. VM](../images/containervsVM.png)
+
+So they are different, Can VMs and Containers coexist? [2]
 
 The answer is “yes.”
 
-VMs (in all their forms) are an excellent place for Docker hosts to run. 
+VMs (in all their forms) are an excellent place for Docker hosts to run.
 
 Another question that is often asked relates to whether or not Docker container-based services can interact with VM-based services. Again, the answer is absolute yes. Running your application in a set of Docker containers doesn’t preclude it from talking to the services running in a VM.
 
@@ -22,4 +24,6 @@ Another area where there can be synergy between VMs and Docker containers is in 
 
 One of the most powerful things about Docker is the flexibility it affords IT organizations. The decision of where to run your applications can be based 100% on what’s right for your business. You’re not locked into any single infrastructure, and you can pick and choose and mix and match in whatever manner makes sense for your organization. Docker hosts on vSphere? Great. Azure? Sure. Physical servers? Absolutely. With Docker containers, you get this great combination of agility, portability, and control.
 
-[1]: docker 101 slides
+[1]: It is true for Linux. However there are two isolation levels in windows, HyperV and Process.
+
+[2]: docker 101 slides

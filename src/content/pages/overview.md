@@ -9,7 +9,8 @@ topic: Overview
 
 ### Purpose
 
-Containerization technology is increasingly gaining attraction in different IT organization as they are transforming their IT infrastructure. This site is trying to give the visitors a better understanding of the docker via the story of e-commerce company moving their existing monolithic application to a micro-service application using Docker.
+Containerization technology is increasingly gaining attraction in different IT organization as they are transforming their IT infrastructure. This site is trying to give the visitors a better understanding of the docker via the story of e-commerce company moving their existing monolithic application to a micro-service application using Docker. If you see <span>   &#9989;</span>, it means the topic is likely be tested in the Docker Certified Associate exam.
+
 
 ### Story
 

@@ -154,6 +154,7 @@ export const pageQuery = graphql`
         title
         description
         order
+        domain
       }
     }
 
@@ -171,6 +172,7 @@ export const pageQuery = graphql`
             title
             description
             order
+            domain
           }
         }
       }

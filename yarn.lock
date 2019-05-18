@@ -4325,6 +4325,13 @@ gatsby-plugin-emotion@^4.0.3:
     "@babel/runtime" "^7.0.0"
     "@emotion/babel-preset-css-prop" "^10.0.5"
 
+gatsby-plugin-google-analytics@^2.0.20:
+  version "2.0.20"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-analytics/-/gatsby-plugin-google-analytics-2.0.20.tgz#ee8f10228a072247686a33d180d978abc574327c"
+  integrity sha512-bv2vlHdG14MIuZU0yUzGvb5Y3kL+UBY2Ii3v9PgYX7Bu7r5np/vMy82vtafkRUsrA3hcK9ipxUw8kmviurvFtQ==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+
 gatsby-plugin-page-creator@^2.0.12:
   version "2.0.12"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-page-creator/-/gatsby-plugin-page-creator-2.0.12.tgz#00a5103715881e141c81b68b670ad8fb06291b7d"
@@ -4392,13 +4399,6 @@ gatsby-remark-autolink-headers@^2.0.16:
     lodash "^4.17.11"
     mdast-util-to-string "^1.0.2"
     unist-util-visit "^1.3.0"
-
-gatsby-remark-default-html-attrs@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-default-html-attrs/-/gatsby-remark-default-html-attrs-1.0.0.tgz#a03225c99ff7f2615da2b1ea188146dc00c45cea"
-  integrity sha512-M4SNfKvQxll+pxy0PoIQjE6D5/SUiBVXD3OOlPnTdqgdCM5gZZatg86/AA2nTwYkdFsyi23GlGPtzKAxYu1WnA==
-  dependencies:
-    unist-util-select "^2.0.0"
 
 gatsby-remark-images@^3.0.11:
   version "3.0.11"
@@ -6999,11 +6999,6 @@ normalize-url@2.0.1:
 normalize-url@^3.0.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
-
-not@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/not/-/not-0.1.0.tgz#c9691c1746c55dcfbe54cbd8bd4ff041bc2b519d"
-  integrity sha1-yWkcF0bFXc++VMvYvU/wQbwrUZ0=
 
 npm-bundled@^1.0.1:
   version "1.0.6"
@@ -10045,18 +10040,6 @@ unist-util-select@^1.5.0:
     debug "^2.2.0"
     nth-check "^1.0.1"
 
-unist-util-select@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/unist-util-select/-/unist-util-select-2.0.0.tgz#226b1a673eaf255302133ff94e450148a021c2c6"
-  integrity sha512-fRQqhrpgRIwdaeeZwbgDO84VyiyQP6cOcbzCao4saXuMuP3fLiWkssEI+o71OC2mASWqa9JEEYiGOV8EqpStPw==
-  dependencies:
-    css-selector-parser "^1.1.0"
-    debug "^3.1.0"
-    not "^0.1.0"
-    nth-check "^1.0.1"
-    unist-util-is "^2.1.2"
-    zwitch "^1.0.3"
-
 unist-util-stringify-position@^1.0.0, unist-util-stringify-position@^1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/unist-util-stringify-position/-/unist-util-stringify-position-1.1.2.tgz#3f37fcf351279dcbca7480ab5889bb8a832ee1c6"
@@ -10680,8 +10663,3 @@ yurnalist@^1.0.2:
 zwitch@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/zwitch/-/zwitch-1.0.3.tgz#159fae4b3f737db1e42bf321d3423e4c96688a18"
-
-zwitch@^1.0.3:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/zwitch/-/zwitch-1.0.4.tgz#93b1b993b13c8926753a41afaf8f27bbfac6be8b"
-  integrity sha512-YO803/X+13GNaZB7fVopjvHH0uWQKgJkgKnU1YCjxShjKGVuN9PPHHW8g+uFDpkHpSTNi3rCMKMewIcbC1BAYg==

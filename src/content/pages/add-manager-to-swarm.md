@@ -1,6 +1,6 @@
 ---
 path: /add-manager-to-swarm
-order: 200
+order: 201
 title: Add manager Swarm Cluster
 description: docker swarm join-token manager
 domain: 1

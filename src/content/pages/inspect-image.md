@@ -1,7 +1,7 @@
 ---
 path: /inspect-image
 order: 11
-title: Working with image
+title: Working with image -inspect image
 description: The commands to work with images
 domain: 1
 topic: Dev and Ops
@@ -18,10 +18,10 @@ After the image is downloaded, Jones want to understand how the image constructe
 
 This command will display metadata of image, like id, archtecture, size 
 
-![image metadata](../images/image-metadata.png)
+![image metadata](../images/image-metadata.PNG)
 
 and *layers* 
 
-![image layers](../images/imagelayers.png)
+![image layers](../images/imagelayers.PNG)
 
 <!--end-->

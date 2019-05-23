@@ -1,7 +1,7 @@
 ---
 path: /pulling-image
 order: 10
-title: Working with image
+title: Working with image - pull image
 description: The commands to work with images
 domain: 1
 topic: Dev and Ops

@@ -20,7 +20,7 @@ This command will display metadata of image, like id, archtecture, size
 
 ![image metadata](../images/image-metadata.PNG)
 
-and *layers* 
+and *layers*
 
 ![image layers](../images/imagelayers.PNG)
 
